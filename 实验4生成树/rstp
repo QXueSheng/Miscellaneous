@@ -1,0 +1,16 @@
+我们本周配置 Rstp
+##实验步骤
+配置两台交换机的TAG VLAN端口（trunk 口）
+两台交换机 配置快速生成树  两台交换机上开启生成树协议 并指定生成树协议类型为RSTP
+按照拓扑图连接对应交换机的端口
+分别查看两台交换机的生成树信息。
+分别查看两台交换机的  Tag Vlan 端口（trunk 口）状态
+我们不用 ping ,我们拔下原来 forwarding 的端口所接网线，观察原来 discarding 的端口变为 forwarding
+
+show spanning-tree 看 RootPort: . RootPort: 0 的是根交换机，没有根口,根交换机的每个端口都是指定端口 PortRole : designatedPort 。PortState : forwarding
+
+show spanning-tree interface  --   
+看 PortState : forwarding / discarding 和 PortRole :  rootPort / designedPort / alternatePort 。
+根端口是非根交换机去往根交换机路径最优的端口，一个非根交换机上最多只有一个根端口。  PortRole : rootPort   PortState : forwarding ，一个 PortRole : alternatePort 端口  PortState : discarding
+
+观察好了之后，我们拔下原来 非根交换机 PortState : forwarding 的  PortRole : rootPort 端口所接网线，观察原来 PortState : discarding 的 PortRole : alternatePort  端口变为 PortState : forwarding 的  PortRole : rootPort 端口
