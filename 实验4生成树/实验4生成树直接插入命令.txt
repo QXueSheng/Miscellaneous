@@ -1,0 +1,28 @@
+en
+conf
+interface range fastethernet 1/1-2 
+switchport mode trunk 
+exit
+spanning-tree
+spanning-tree mode rstp
+
+show spanning-tree
+show spanning-tree interface fa 1/1
+show spanning-tree interface fa 1/2
+
+
+
+
+
+
+en
+conf
+interface range gi 0/1-2 
+switchport mode trunk 
+exit
+spanning-tree
+spanning-tree mode rstp
+
+show spanning-tree
+show spanning-tree interface gi 0/1
+show spanning-tree interface gi 0/2
